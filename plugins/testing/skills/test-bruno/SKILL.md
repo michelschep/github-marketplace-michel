@@ -84,6 +84,10 @@ be linked.
   Node.js, the package manager, a compatible version, or installation is
   unavailable, report the blocker and mark the suite NOT RUN. Never silently
   install Node.js or change machine-wide settings.
+- Disable optional telemetry using settings verified for the installed CLI and
+  package manager, scoped to the process. Do not invent unsupported flags,
+  enable uploads, or persist machine-wide settings; disclose any telemetry
+  that cannot be disabled or verified.
 
 ## TLS certificate errors
 

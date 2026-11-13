@@ -60,6 +60,15 @@ For requested Bruno runs, a missing compatible Bruno CLI is installed locally
 in a test-only location, not globally. TLS verification stays enabled; a
 temporary bypass requires approval and is limited to verified local targets.
 
+For a requested Artillery test, an authorized local target can use a read-only
+20-second smoke profile at 5 users/second, with p95 below 500 ms and zero
+errors. The profile is not a capacity benchmark. The included test-only runner
+checks that the `ensure` plugin is available and that every configured check
+actually ran; missing evidence marks the attempt invalid rather than passed.
+Artillery is installed locally in `.test-tools/artillery` when needed, with
+telemetry disabled. Bruno durations are labeled as functional runtimes, not
+performance measurements.
+
 HTML test-status overviews use matching templates in `test-status` and
 `test-all` for recorded results and fresh runs. Detailed native reports remain
 available as links when produced.
@@ -70,7 +79,8 @@ change boundary; review its instructions and dependencies before publishing it.
 Add agents as `*.agent.md` files in
 `plugins/testing/com.github.copilot/agents/`.
 
-No runner, hooks, MCP servers, or LSP servers are included. When needed, add an
+The Artillery skill includes a focused runner; no hooks, MCP servers, or LSP
+servers are included. When needed, add an
 Agent Plugins MCP configuration at `plugins/testing/mcp.json` or Copilot-specific
 hook and LSP configurations under `plugins/testing/com.github.copilot/`.
 See the [plugin authoring guide](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-creating)

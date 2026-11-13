@@ -51,6 +51,9 @@ changes before use; stop if they are required.
   bypass. Never globally install tools or silently disable TLS verification.
 - For browser suites, follow `test-playwright`; request approval before UI
   actions that change data. A run-only request does not create tests.
+- For Artillery, follow `test-artillery` for telemetry, verified ensure checks,
+  isolated evidence and fail-closed runner behavior. Do not create a profile
+  merely because all suites were requested.
 - Verify target ownership/readiness. Use documented owned services and isolated
   data; do not start an API/database for a library-only solution or silently use
   an unidentified shared service.
@@ -71,6 +74,8 @@ changes before use; stop if they are required.
 1. Inspect each command exit code and fresh raw results. Derive actual counts,
    skips, errors, thresholds, and timings from the producer's schema; do not
    assume a specific summary JSON layout or equate HTTP success with test PASS.
+   Label Bruno duration "Functional runtime, not performance". Missing
+   Artillery threshold evidence is INVALID/UNKNOWN, never PASS.
 2. Use `assets/test-overview-template.html` in this skill directory for the
    archived HTML overview of this run. Fill every placeholder
    using verified results; never publish the template with placeholders or

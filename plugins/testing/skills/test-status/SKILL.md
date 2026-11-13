@@ -65,6 +65,12 @@ results. The managed dashboard is the only existing report this skill updates.
    When only file modification time is available, label it as such. If report
    identity, freshness, or results cannot be verified, mark them UNKNOWN or
    STALE and explain why.
+   Label Bruno duration explicitly as "Functional runtime, not performance";
+   it is not an Artillery measurement. For Artillery, verify threshold evidence
+   against the actual profile and producer schema. Mark missing or incomplete
+   checks INVALID/UNKNOWN, never PASS, even for an old zero-exit run. Preserve
+   the latest invalid attempt and its timestamp rather than silently displaying
+   an older valid PASS; link its evidence when available and state the reason.
 4. Include missing categories as NOT CONFIGURED and configured suites with no
    recorded execution as NOT RUN. Preserve recorded failures, errors, and skips. Never
    infer PASS from a missing result, a prior run, or a zero exit code alone.
@@ -88,7 +94,7 @@ results. The managed dashboard is the only existing report this skill updates.
    from potentially different runs. Every executed suite row must include its
    own recorded execution time and run ID in its Last run cell, not just in
    the page header; use UNKNOWN if unavailable. Explain missing or stale
-   evidence. The overall banner must not
+   evidence and explain invalid Artillery attempts. The overall banner must not
    imply a complete fresh pass when the evidence cannot establish one.
 2. Read or refresh the canonical dashboard as described above; do not create a
    separate status page for each request. Verify every link is relative, exists,
@@ -121,7 +127,7 @@ substitute for the overall dashboard.
     thead{background:#e8edf5}
     .pass{color:#146c36;font-weight:bold}
     .fail,.error{color:#a32222;font-weight:bold}
-    .not-run,.not-configured,.not-selected,.skipped,.unknown,.stale{color:#667085;white-space:nowrap}
+    .not-run,.not-configured,.not-selected,.skipped,.unknown,.stale,.invalid{color:#667085;white-space:nowrap}
     .banner{padding:18px;background:white;border-left:5px solid currentColor;margin:24px 0}
     a{color:#164fa4}
     small{color:#536079}
