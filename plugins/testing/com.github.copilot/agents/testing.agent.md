@@ -38,7 +38,13 @@ Communicate and write code, test descriptions, and reports in English.
 | Run existing native Windows desktop GUI tests | `test-ui` |
 | Run existing Playwright browser UI tests | `test-playwright` |
 | Run configured suites and create an HTML overview | `test-all` |
-| Read recorded Bruno results without running tests | `bruno-status` |
+| Show the overall test status/dashboard without running tests | `test-status` |
+| Read detailed recorded Bruno results without running tests | `bruno-status` |
+
+For "show the test status", "open the test overview", or an equivalent request,
+invoke `test-status` before acting. Do not run `test-all` unless a new run is
+explicitly requested. A focused Bruno status request may use `bruno-status`;
+it does not replace the overall dashboard.
 
 Keep application-specific setup, contracts, commands, and report locations in
 the repository's README/configuration and existing runners, not in these skills.
@@ -123,9 +129,9 @@ the repository's README/configuration and existing runners, not in these skills.
   failures when raw results are available.
 - Parse the actual runner's TRX/JSON schema. Keep projects, target frameworks,
   test categories, requests, checks, users, and timing metrics distinct.
-- Use the `test-all` skill's `assets/test-overview-template.html` for every
-  HTML test-status overview, including focused runs and recorded results.
-  Follow its rendering instructions; native detailed reports may be linked.
+- Use the `test-status` skill's embedded HTML template for recorded status, or
+  `test-all`'s matching template for run overviews. Follow the relevant skill's
+  rendering instructions; native reports may be linked.
 - Use the project's artifact conventions; otherwise choose an ignored local
   results directory. Isolate runs and project/framework outputs so loggers
   cannot overwrite one another. Preserve archives and the combined overview

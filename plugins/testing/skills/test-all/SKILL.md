@@ -8,6 +8,7 @@ description: Discover and run a .NET solution's configured test suites and gener
 Read applicable repository instructions, including `AGENTS.md` when present,
 and testing documentation. Use focused skills for framework-specific work.
 This skill coordinates the solution's actual suites, not a fixed suite count.
+For a status or dashboard request without a new run, use `test-status` instead.
 
 Never modify application code, configuration, dependencies, or behavior, or
 create or modify xUnit tests or their project/fixture configuration. This is a

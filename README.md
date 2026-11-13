@@ -21,16 +21,23 @@ copilot --agent testing:testing
 ```
 
 In an existing session, select the agent with `/agent testing:testing`. Ask it
-to create or run Bruno or Artillery tests, run existing suites, or show recorded
-Bruno results. The agent discovers the project's own tools, configuration,
+to create or run Bruno or Artillery tests, run existing suites, or show the
+overall test status. The agent discovers the project's own tools, configuration,
 targets, and test runners rather than assuming a particular application.
+
+To show the recorded overall status dashboard without running tests, ask
+"show the overall test status page" or invoke `/test-status` in the session.
+Use `/test-all` when you actually want a fresh test run. The status skill opens
+the page when asked and reports if it cannot; it labels recorded or incomplete
+results rather than treating a focused run as an overall run.
 
 ## Plugin contents
 
 - `plugins/testing/plugin.json`: plugin metadata.
 - `plugins/testing/com.github.copilot/agents/testing.agent.md`: testing agent.
 - `plugins/testing/skills/`: skills for Bruno, Artillery, xUnit, desktop UI,
-  Playwright, combined test runs, and recorded Bruno results.
+  Playwright, combined test runs, the overall status page, and recorded Bruno
+  results.
 - `plugins/testing/com.github.copilot/commands/`, `hooks/`, and `rules/`:
   placeholders for future Copilot-specific components.
 
@@ -42,10 +49,9 @@ existing runners before using them and stops if they require prohibited changes.
 These are agent instructions, not a technical security boundary; review tool
 permissions and proposed changes.
 
-HTML test-status overviews use the shared
-`plugins/testing/skills/test-all/assets/test-overview-template.html` layout for
-both fresh runs and recorded results. Detailed native reports remain available
-as links when produced.
+HTML test-status overviews use matching templates in `test-status` and
+`test-all` for recorded results and fresh runs. Detailed native reports remain
+available as links when produced.
 
 To add an existing skill, copy its directory, including `SKILL.md` and any
 supporting files, into `plugins/testing/skills/`. Ensure it respects the same

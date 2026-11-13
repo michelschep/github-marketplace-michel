@@ -10,6 +10,7 @@ and testing documentation. This is an overview of recorded results, not a new
 test run. Do not change test sources, existing results, or the application;
 generating a separate local status report is permitted.
 Do not require a specific collection path, report location, or CLI version.
+For an overall dashboard covering all test types, use `test-status` instead.
 
 Never modify application code, configuration, dependencies, or behavior, or
 create or modify xUnit tests or their project/fixture configuration. For an
