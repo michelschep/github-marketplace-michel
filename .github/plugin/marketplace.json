@@ -1,0 +1,18 @@
+{
+  "name": "michel-marketplace",
+  "metadata": {
+    "description": "Michel's GitHub Copilot plugin marketplace",
+    "version": "1.0.0"
+  },
+  "owner": {
+    "name": "michelschep"
+  },
+  "plugins": [
+    {
+      "name": "testing",
+      "description": "Testing agents and skills",
+      "version": "0.1.0",
+      "source": "./plugins/testing"
+    }
+  ]
+}
