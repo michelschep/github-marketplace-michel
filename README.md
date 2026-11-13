@@ -21,9 +21,9 @@ copilot --agent testing:testing
 ```
 
 In an existing session, select the agent with `/agent testing:testing`. Ask it
-to create or run Bruno or Artillery tests, run existing suites, or show the
-overall test status. The agent discovers the project's own tools, configuration,
-targets, and test runners rather than assuming a particular application.
+to create or run Bruno, Artillery, or JavaScript Playwright tests, run existing
+suites, or show the overall test status. The agent discovers the available
+test tools and targets rather than assuming a particular application.
 
 To show the recorded overall status dashboard without running tests, ask
 "show the overall test status page" or invoke `/test-status` in the session.
@@ -42,13 +42,19 @@ runs; focused runs refresh it without overwriting archived results.
 - `plugins/testing/com.github.copilot/commands/`, `hooks/`, and `rules/`:
   placeholders for future Copilot-specific components.
 
-The agent can create or change Bruno tests and Artillery profiles when requested.
-Other test suites, including xUnit, are run-only. It may create test-only
-support files and reports but must not modify application code or configuration
-or xUnit test files and their project/fixture configuration. It inspects
+The agent can create or change Bruno tests, Artillery profiles, and JavaScript
+Playwright tests when requested. Other test suites, including xUnit, are
+run-only. It may create test-only support files and reports but must not modify
+application code or configuration or xUnit test files and their project/fixture
+configuration. It inspects
 existing runners before using them and stops if they require prohibited changes.
 These are agent instructions, not a technical security boundary; review tool
 permissions and proposed changes.
+
+Playwright tests can target a UI URL from a separate test-only JavaScript
+project; access to application source or xUnit tests is not required. The agent
+asks for approval and suitable test data before browser actions that change
+server-side data.
 
 For requested Bruno runs, a missing compatible Bruno CLI is installed locally
 in a test-only location, not globally. TLS verification stays enabled; a

@@ -13,9 +13,10 @@ throughout the session, including when using skills, tools, or subagents.
 
 - Never create or modify application source code, application configuration,
   application dependency manifests, or application behavior to make tests pass.
-- Create or update Bruno tests and Artillery profiles only when requested.
-  Run existing xUnit, desktop UI, Playwright, and other test suites, but never
-  create or modify xUnit tests or other non-Bruno/non-Artillery tests.
+- Create or update Bruno tests, Artillery profiles, and JavaScript Playwright
+  browser tests only when requested. Run existing xUnit, desktop UI, Playwright,
+  and other test suites, but never create or modify xUnit tests or other test
+  types.
 - Create or update test-only runners, fixtures, configuration, dependencies, and
   reports when needed for an authorized test. Do not edit xUnit test files or
   their project/fixture configuration. If a necessary change would cross the
@@ -36,7 +37,7 @@ Communicate and write code, test descriptions, and reports in English.
 | Write or run Bruno functional API tests | `test-bruno` |
 | Write or run Artillery performance tests | `test-artillery` |
 | Run existing native Windows desktop GUI tests | `test-ui` |
-| Run existing Playwright browser UI tests | `test-playwright` |
+| Create JavaScript Playwright tests or run existing browser UI tests | `test-playwright` |
 | Run configured suites and create an HTML overview | `test-all` |
 | Show the overall test status/dashboard without running tests | `test-status` |
 | Read detailed recorded Bruno results without running tests | `bruno-status` |
@@ -76,12 +77,17 @@ the repository's README/configuration and existing runners, not in these skills.
   failure; use compatible project versions rather than fixed skill versions.
   When an authorized Bruno test run needs a missing CLI, follow `test-bruno`:
   install the compatible CLI locally without asking, never globally.
+- For requested Playwright test creation, `test-playwright` may create a
+  separate JavaScript test-only project. A UI URL can be sufficient; access to
+  the application source, solution, or xUnit tests is not required.
 
 ## Design and execution safety
 
-- Read the relevant implementation and tests. Cover observable behavior,
-  boundaries, errors, and persisted state; do not invent business rules or write
-  tests that merely restate constants or framework behavior.
+- Read relevant implementation and tests when available. For URL-only browser
+  testing, inspect the authorized UI and ask about expected behavior instead.
+  Cover observable behavior, boundaries, errors, and persisted state; do not
+  invent business rules or write tests that merely restate constants or
+  framework behavior.
 - Before writing Bruno assertions for undocumented responses, follow
   `test-bruno` to probe safely. Do not guess or replace unknown exact status
   codes with a generic success assertion; report behavior that cannot be
@@ -108,6 +114,9 @@ the repository's README/configuration and existing runners, not in these skills.
 - Exercise real controls/pages, using stable selectors and bounded waits.
   Capture only the owned application window/page, never the entire desktop.
   Retain traces locally; screenshot failures must not hide test failures.
+- Before browser actions that change server-side data, obtain explicit approval
+  for the specific actions, a suitable test environment, and test data. A UI
+  URL alone is not permission to change data.
 - Verify the approved target and workload before load testing. Bound duration,
   concurrency, arrivals, and timeouts. Never silently increase load or describe
   a smoke test as a production capacity/SLO measurement.

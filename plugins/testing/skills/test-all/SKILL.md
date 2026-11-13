@@ -1,6 +1,6 @@
 ---
 name: test-all
-description: Discover and run a .NET solution's configured test suites and generate an HTML overview with linked detailed reports. Supports existing .NET frameworks, Bruno, Artillery, desktop UI, and Playwright without requiring every category.
+description: Discover and run configured test suites and generate an HTML overview with linked detailed reports. Supports .NET, Bruno, Artillery, desktop UI, and standalone JavaScript Playwright suites.
 ---
 
 # Run all tests and show the overview
@@ -21,7 +21,8 @@ changes before use; stop if they are required.
 1. Identify the selected solution(s), test projects/frameworks, API collections,
    performance profiles, native UI tests, and browser tests. Inspect SDK/tool
    configuration, manifests, runsettings, existing runners, service requirements,
-   result schemas, and artifact conventions.
+   result schemas, and artifact conventions. A standalone JavaScript Playwright
+   project and its UI URL do not require a .NET solution or application source.
 2. Build a suite inventory with category, tool/framework, source, supported
    command, prerequisites, dependencies, target, required/optional status, and
    output location. Use explicit project policy where present; otherwise treat
@@ -48,6 +49,8 @@ changes before use; stop if they are required.
 - For a missing Bruno CLI or a Bruno TLS error, follow `test-bruno`: install a
   compatible CLI locally when needed, and ask before an eligible local TLS
   bypass. Never globally install tools or silently disable TLS verification.
+- For browser suites, follow `test-playwright`; request approval before UI
+  actions that change data. A run-only request does not create tests.
 - Verify target ownership/readiness. Use documented owned services and isolated
   data; do not start an API/database for a library-only solution or silently use
   an unidentified shared service.
@@ -69,7 +72,7 @@ changes before use; stop if they are required.
    skips, errors, thresholds, and timings from the producer's schema; do not
    assume a specific summary JSON layout or equate HTTP success with test PASS.
 2. Use `assets/test-overview-template.html` in this skill directory for the
-archived HTML overview of this run. Fill every placeholder
+   archived HTML overview of this run. Fill every placeholder
    using verified results; never publish the template with placeholders or
    fabricate missing data. Escape all dynamic text and attribute values.
    `SCOPE`, `TIMES`, and `OVERALL_STATUS` are text; `OVERALL_CLASS` is a
