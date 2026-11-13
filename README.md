@@ -1,7 +1,7 @@
 # Michel's Copilot plugin marketplace
 
 A public marketplace containing the `testing` plugin for GitHub Copilot.
-It uses the Agent Plugins 1.0 format. Skills are portable; the example agent
+It uses the Agent Plugins 1.0 format. Skills are portable; the testing agent
 and other namespaced components are specific to Copilot and may not be
 supported by every client.
 
@@ -13,21 +13,42 @@ copilot plugin marketplace browse michel-marketplace
 copilot plugin install testing@michel-marketplace
 ```
 
+For an existing installation, run `copilot plugin update testing@michel-marketplace`.
+From the project you want to test, start a testing-focused session:
+
+```shell
+copilot --agent testing:testing
+```
+
+In an existing session, select the agent with `/agent testing:testing`. Ask it
+to create or run Bruno or Artillery tests, run existing suites, or show recorded
+Bruno results. The agent discovers the project's own tools, configuration,
+targets, and test runners rather than assuming a particular application.
+
 ## Plugin contents
 
 - `plugins/testing/plugin.json`: plugin metadata.
-- `plugins/testing/skills/test-change/SKILL.md`: example testing skill.
-- `plugins/testing/com.github.copilot/agents/testing-helper.agent.md`: example
-  testing agent.
+- `plugins/testing/com.github.copilot/agents/testing.agent.md`: testing agent.
+- `plugins/testing/skills/`: skills for Bruno, Artillery, xUnit, desktop UI,
+  Playwright, combined test runs, and recorded Bruno results.
 - `plugins/testing/com.github.copilot/commands/`, `hooks/`, and `rules/`:
   placeholders for future Copilot-specific components.
 
+The agent can create or change Bruno tests and Artillery profiles when requested.
+Other test suites, including xUnit, are run-only. It may create test-only
+support files and reports but must not modify application code or configuration
+or xUnit test files and their project/fixture configuration. It inspects
+existing runners before using them and stops if they require prohibited changes.
+These are agent instructions, not a technical security boundary; review tool
+permissions and proposed changes.
+
 To add an existing skill, copy its directory, including `SKILL.md` and any
-supporting files, into `plugins/testing/skills/`. Review its instructions and
-dependencies before publishing it. Add agents as `*.agent.md` files in
+supporting files, into `plugins/testing/skills/`. Ensure it respects the same
+change boundary; review its instructions and dependencies before publishing it.
+Add agents as `*.agent.md` files in
 `plugins/testing/com.github.copilot/agents/`.
 
-No hooks, MCP servers, or LSP servers are configured. When needed, add an
+No runner, hooks, MCP servers, or LSP servers are included. When needed, add an
 Agent Plugins MCP configuration at `plugins/testing/mcp.json` or Copilot-specific
 hook and LSP configurations under `plugins/testing/com.github.copilot/`.
 See the [plugin authoring guide](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-creating)
