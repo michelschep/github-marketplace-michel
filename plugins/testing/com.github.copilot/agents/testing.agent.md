@@ -74,6 +74,8 @@ the repository's README/configuration and existing runners, not in these skills.
   application or install a framework. Create tests only when requested. Install
   dependencies only after a dependency-manifest change or a missing-dependency
   failure; use compatible project versions rather than fixed skill versions.
+  When an authorized Bruno test run needs a missing CLI, follow `test-bruno`:
+  install the compatible CLI locally without asking, never globally.
 
 ## Design and execution safety
 
@@ -108,6 +110,8 @@ the repository's README/configuration and existing runners, not in these skills.
 - Keep secrets out of source, command output, and artifacts. Do not upload
   reports, traces, or source. Disable optional telemetry where supported.
   Browser installation is explicit setup, not an automatic download every run.
+- Never disable TLS verification silently. For an owned local Bruno target,
+  follow `test-bruno` and ask before a narrowly scoped `--insecure` retry.
 
 ## Outcomes and reporting
 

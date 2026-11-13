@@ -45,6 +45,9 @@ changes before use; stop if they are required.
 - Execute the requested suites, not just instructions for the user. Preserve
   project versions, configurations, browser matrices, and approved load limits.
   A run-only request is not permission to add tests or change thresholds.
+- For a missing Bruno CLI or a Bruno TLS error, follow `test-bruno`: install a
+  compatible CLI locally when needed, and ask before an eligible local TLS
+  bypass. Never globally install tools or silently disable TLS verification.
 - Verify target ownership/readiness. Use documented owned services and isolated
   data; do not start an API/database for a library-only solution or silently use
   an unidentified shared service.

@@ -49,6 +49,10 @@ existing runners before using them and stops if they require prohibited changes.
 These are agent instructions, not a technical security boundary; review tool
 permissions and proposed changes.
 
+For requested Bruno runs, a missing compatible Bruno CLI is installed locally
+in a test-only location, not globally. TLS verification stays enabled; a
+temporary bypass requires approval and is limited to verified local targets.
+
 HTML test-status overviews use matching templates in `test-status` and
 `test-all` for recorded results and fresh runs. Detailed native reports remain
 available as links when produced.
