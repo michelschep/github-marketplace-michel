@@ -14,9 +14,8 @@ Run existing tests only: never create or modify Playwright or xUnit tests, xUnit
 project/fixture configuration, or application code, configuration, dependencies,
 or behavior. Test-only runners and reports may be created when needed. Inspect
 runners for prohibited persistent changes before use; stop if they are required.
-Use the `test-all` skill's `assets/test-overview-template.html` for any HTML
-test-status overview, following that skill's rendering instructions; native
-detailed reports may be linked.
+Use `test-status` for the canonical HTML dashboard; native detailed reports may
+be linked.
 
 ## Discover and setup
 
@@ -51,8 +50,10 @@ detailed reports may be linked.
    are not PASS. Report skipped tests distinctly.
 4. Produce HTML through supported reporters or a local raw-result summary.
    Verify current-run links to raw results, logs, and available screenshots/traces.
-   Preserve archives and the combined overview during a focused run.
+   Preserve archived run overviews during a focused run.
 5. Dispose owned contexts, browsers, and services even after failure; restore
    settings. Report actual framework/browser/mode, scope, time, counts, outcomes,
    and relative detail path. Open reports/traces only when requested, using a
    matching local trace viewer; stop temporary viewer helpers afterward.
+6. Record each completed, failed, or blocked attempt and refresh the canonical
+   dashboard using `test-status`. Report refresh failures separately.

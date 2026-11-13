@@ -12,9 +12,8 @@ Run existing tests only: never create or modify desktop UI or xUnit tests, xUnit
 project/fixture configuration, or application code, configuration, dependencies,
 or behavior. Test-only runners and reports may be created when needed. Inspect
 runners for prohibited persistent changes before use; stop if they are required.
-Use the `test-all` skill's `assets/test-overview-template.html` for any HTML
-test-status overview, following that skill's rendering instructions; native
-detailed reports may be linked.
+Use `test-status` for the canonical HTML dashboard; native detailed reports may
+be linked.
 
 ## Discover and preflight
 
@@ -54,5 +53,7 @@ detailed reports may be linked.
    start time, and executable identity before cleanup. Restore test settings and
    remove only owned data. Preserve unrelated browser/application sessions.
 6. Report test category, actual automation library/backend and test framework,
-   scope, time, outcomes/counts, and verified relative report path. Preserve the
-   combined overview on focused runs and open reports only when requested.
+   scope, time, outcomes/counts, and verified relative report path. Preserve
+   archived run overviews and open reports only when requested.
+7. Record each completed, failed, or blocked attempt and refresh the canonical
+   dashboard using `test-status`. Report refresh failures separately.

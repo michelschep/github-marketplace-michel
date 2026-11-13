@@ -28,8 +28,9 @@ targets, and test runners rather than assuming a particular application.
 To show the recorded overall status dashboard without running tests, ask
 "show the overall test status page" or invoke `/test-status` in the session.
 Use `/test-all` when you actually want a fresh test run. The status skill opens
-the page when asked and reports if it cannot; it labels recorded or incomplete
-results rather than treating a focused run as an overall run.
+the page when asked and reports if it cannot. The shared dashboard shows the
+latest recorded attempt and time for each suite, which may come from different
+runs; focused runs refresh it without overwriting archived results.
 
 ## Plugin contents
 

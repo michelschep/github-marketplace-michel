@@ -14,9 +14,8 @@ create or modify xUnit tests or their project/fixture configuration. Create or
 update Bruno tests only when requested; test-only runners, fixtures,
 configuration, dependencies, and reports are permitted when needed. Inspect
 runners for prohibited persistent changes before use; stop if they are required.
-Use the `test-all` skill's `assets/test-overview-template.html` for any HTML
-test-status overview, following that skill's rendering instructions; native
-detailed reports may be linked.
+Use `test-status` for the canonical HTML dashboard; native detailed reports may
+be linked.
 
 ## Discover
 
@@ -27,9 +26,37 @@ detailed reports may be linked.
   statuses, authentication, and update semantics from evidence, not examples.
 - Inspect the project's runner and reporter options. Resolve multiple collections
   or targets from the request/documented defaults; ask if materially ambiguous.
+- Before writing tests or starting a requested run, check the configured local
+  Bruno executable with `--version` and inspect its run options. Do not use
+  `npx` in a way that can download a package during this check. If it is missing,
+  report it during create-only work; for a requested run, install it as below
+  before creating the collection or running tests.
 - If no collection exists, report NOT CONFIGURED unless creating tests was
   requested. Do not scaffold an API, collection, or authentication scheme simply
   because this skill was invoked.
+
+## Verify endpoint behavior before authoring
+
+- Read the contract, implementation, and existing tests first. Where response
+  behavior is undocumented or ambiguous, probe each relevant HTTP method and
+  endpoint once before writing assertions, when it is safe to do so. Record
+  observed status codes and relevant response behavior as evidence; do not
+  assume all successful operations return the same status.
+- Verify the target and use an owned, isolated test host and test data. GET
+  requests may also have side effects; inspect the endpoint before probing.
+  Do not send even GET or HEAD requests to an unidentified or unapproved target.
+  For writes and deletes, create a uniquely owned fixture, record its exact
+  identifier, and clean it up safely. Do not send destructive requests against
+  existing records or silently probe production, shared, or unknown targets.
+- Warn explicitly if the target may contain real data. If isolation, side
+  effects, target identity, or cleanup cannot be verified, ask before any
+  potentially mutating probe; do not probe if it would endanger real data. If
+  no safe probe is possible, state what is unverified rather than inventing an
+  expected response. Follow the TLS rules below; never use `curl -k` silently.
+- A recorded response is evidence, not proof of intended behavior. If it
+  conflicts with an explicit contract, report the discrepancy rather than
+  changing assertions solely to make the run pass. Do not replace an unknown
+  exact status with a generic success assertion merely to avoid verifying it.
 
 ## Missing Bruno CLI
 
@@ -41,8 +68,13 @@ detailed reports may be linked.
   a status-only or create-only request. Do not use global installation or modify
   application or xUnit manifests, lockfiles, or source.
 - Reuse a documented test-only dependency setup if it is safe. Otherwise use
-  an isolated test-tools directory, outside application dependency trees. Use
-  the project's pinned CLI version when available; otherwise resolve a
+  `.test-tools/bruno` at the project root for the local CLI, outside application
+  dependency trees. Before installing, verify that this directory and any
+  `node_modules` produced by test tooling are ignored by Git; add narrow
+  test-tool and `node_modules/` ignore entries if needed without overriding
+  existing rules or modifying tracked dependencies. If Git ignores cannot be
+  safely changed, use an isolated test-tools directory outside the project
+  instead. Use the project's pinned CLI version when available; otherwise resolve a
   compatible stable version from the configured package registry, checking the
   installed Node.js version, package engine requirements, and collection format.
   Do not silently use an unpinned latest version or upgrade a project pin.
@@ -77,7 +109,15 @@ detailed reports may be linked.
   Cover observable responses, validation, authorization, boundaries, and saved
   state relevant to the requested behavior.
 - Chain captured identifiers in lifecycle scenarios. Use unique owned fixtures
-  and failure-safe cleanup; never delete unrelated records.
+  and record their exact identifiers as soon as creation succeeds. Implement a
+  cleanup path that runs after both success and failure, using supported Bruno
+  hooks or an owned test-only runner with a `finally` equivalent. Do not rely on
+  a final request or a hook that can be skipped after an earlier failure.
+- Verify cleanup and report any remaining or unknown fixtures. A timeout may
+  create a record without returning its identifier; do not delete by prefix
+  or guessed identity, even if a name looks unique. If failure-safe cleanup
+  cannot be guaranteed, disclose the risk and request approval before using a
+  shared or real-data target; prefer an isolated disposable environment.
 - Follow scripting APIs supported by the configured CLI. For intentional error
   responses, ensure the HTTP client passes those responses to assertions rather
   than throwing first. Do not assume an option works in every CLI version.
@@ -103,5 +143,9 @@ detailed reports may be linked.
    Missing/unknown/skipped results must remain visible.
 6. Preserve actual collection sequence/numeric labels in scenario tables. Include
    scope, environment without secrets, time, totals, and verified relative
-   report/raw/log links. Do not overwrite another suite's combined overview.
+   report/raw/log links. After every completed, failed, or blocked Bruno run,
+   record the attempt and refresh the canonical dashboard using the
+   `test-status` skill's recorded per-suite policy. Preserve archived per-run
+   reports. Report a dashboard
+   update failure separately; never show an older Bruno PASS as the latest run.
    Open HTML only when requested; CLI reports are not Desktop run history.

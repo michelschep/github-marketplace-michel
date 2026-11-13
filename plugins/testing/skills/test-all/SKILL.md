@@ -68,14 +68,15 @@ changes before use; stop if they are required.
 1. Inspect each command exit code and fresh raw results. Derive actual counts,
    skips, errors, thresholds, and timings from the producer's schema; do not
    assume a specific summary JSON layout or equate HTTP success with test PASS.
-2. Always use `assets/test-overview-template.html` in this skill directory for
-   the HTML status overview, including focused runs. Fill every placeholder
+2. Use `assets/test-overview-template.html` in this skill directory for the
+archived HTML overview of this run. Fill every placeholder
    using verified results; never publish the template with placeholders or
    fabricate missing data. Escape all dynamic text and attribute values.
    `SCOPE`, `TIMES`, and `OVERALL_STATUS` are text; `OVERALL_CLASS` is a
    fixed status class from the template. `ROWS` contains one table row per
    suite, with row-header test type, technology, status, a `metrics` list,
-   duration, and a `details` cell with relative links to existing artifacts.
+   duration, a Last run cell with run time and ID, and a `details` cell with
+   relative links to existing artifacts.
    `NOTES` contains short paragraphs describing scope/status limitations;
    `SUMMARY_LINK` is an optional link to a verified machine-readable summary.
    Use `-` for unavailable details and do not invent links. Reuse project
@@ -93,6 +94,9 @@ changes before use; stop if they are required.
 5. Overall success requires actual execution and every required configured suite
    passing. Retain nonzero execution outcome for required failures/blocked suites
    and reporting errors; list any optional omissions without implying coverage.
-6. Summarize actual scope, suite outcomes, separate counts/latency units, and the
-   overview's relative path in English. Open it only when requested and claim
-   it opened only after launch succeeds. Local HTML is not a hosted dashboard.
+6. Record each suite attempt, including blocked attempts, then refresh the
+   canonical latest-per-suite dashboard using `test-status`; preserve the archived
+   run overview. Report dashboard
+   refresh failures separately. Summarize actual scope, suite outcomes, separate
+   counts/latency units, and relative paths in English. Open a report only when
+   requested and claim it opened only after launch succeeds.

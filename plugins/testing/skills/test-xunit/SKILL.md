@@ -13,9 +13,8 @@ Never create or modify xUnit tests, their project or fixture configuration, or
 application code, configuration, dependencies, or behavior. Test-only runners
 and reports may be created when needed. Inspect existing runners for prohibited
 persistent changes before use; stop and explain if those changes are necessary.
-Use the `test-all` skill's `assets/test-overview-template.html` for any HTML
-test-status overview, following that skill's rendering instructions; native
-detailed reports may be linked.
+Use `test-status` for the canonical HTML dashboard; native detailed reports may
+be linked.
 
 ## Discover and scope
 
@@ -38,7 +37,7 @@ detailed reports may be linked.
   projects. Otherwise invoke their configured .NET test runner directly using
   its supported project/filter/report options; resolve paths from discovery.
 - Run the smallest relevant scope. Keep output unique per run, project, and
-  target framework. Preserve the combined overview during a focused run.
+  target framework. Preserve archived run overviews during a focused run.
 - Generate native raw results (TRX when supported) and HTML using available
   reporters. If native HTML is unavailable, create a local HTML summary from
   raw results; do not install a reporter or switch runners without justification.
@@ -47,3 +46,5 @@ detailed reports may be linked.
 - Report actual category, xUnit/runner, scope, counts, time, and verified relative
   detail/raw/log paths. Distinguish test failures from setup/reporting errors.
   Do not imply other suites passed or open reports unless requested.
+- Record each completed, failed, or blocked attempt and refresh the canonical
+  dashboard using `test-status`. Report refresh failures separately.

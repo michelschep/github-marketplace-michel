@@ -14,9 +14,8 @@ create or modify xUnit tests or their project/fixture configuration. Create or
 update Artillery tests only when requested; test-only runners, fixtures,
 configuration, dependencies, and reports are permitted when needed. Inspect
 runners for prohibited persistent changes before use; stop if they are required.
-Use the `test-all` skill's `assets/test-overview-template.html` for any HTML
-test-status overview, following that skill's rendering instructions; native
-detailed reports may be linked.
+Use `test-status` for the canonical HTML dashboard; native detailed reports may
+be linked.
 
 ## Discover and approve scope
 
@@ -61,8 +60,10 @@ detailed reports may be linked.
    compatible local converter when present. Otherwise render a local HTML
    summary from JSON, clearly labeling its scope. Do not automatically downgrade,
    install an unsupported legacy reporter, or upload results to obtain HTML.
-5. Verify HTML/raw/log links belong to this run. Preserve the combined overview
+5. Verify HTML/raw/log links belong to this run. Preserve archived run overviews
    during focused execution. Report scope, tool version, target without secrets,
    workload, real metrics/outcomes, and relative report path.
 6. Distinguish test failure from HTML conversion failure. Retain partial raw
    results, clean up owned resources, and open the report only when requested.
+7. Record each completed, failed, or blocked attempt and refresh the canonical
+   dashboard using `test-status`. Report refresh failures separately.

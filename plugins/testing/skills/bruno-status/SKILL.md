@@ -64,11 +64,9 @@ and stop if they are required.
   printing tokens, authorization headers, or unrelated request/response data.
 - Finish with the relative report path and explicitly state:
   **No new run was performed.**
-- For an HTML test-status overview, use the `test-all` skill's
-  `assets/test-overview-template.html` and its rendering instructions. Label it
-  as recorded, include the recorded time and freshness, and link only verified
-  artifacts from that run. Preserve existing reports; do not generate fresh
-  results by running tests. A detailed scenario table may supplement the overview.
+- For the overall HTML status dashboard use `test-status`. A detailed Bruno
+  scenario table may supplement it. Preserve existing reports; do not generate
+  fresh results by running tests.
 
 ## Explicit requests to rerun or open results
 
