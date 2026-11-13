@@ -42,6 +42,11 @@ existing runners before using them and stops if they require prohibited changes.
 These are agent instructions, not a technical security boundary; review tool
 permissions and proposed changes.
 
+HTML test-status overviews use the shared
+`plugins/testing/skills/test-all/assets/test-overview-template.html` layout for
+both fresh runs and recorded results. Detailed native reports remain available
+as links when produced.
+
 To add an existing skill, copy its directory, including `SKILL.md` and any
 supporting files, into `plugins/testing/skills/`. Ensure it respects the same
 change boundary; review its instructions and dependencies before publishing it.

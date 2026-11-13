@@ -14,6 +14,9 @@ create or modify xUnit tests or their project/fixture configuration. Create or
 update Bruno tests only when requested; test-only runners, fixtures,
 configuration, dependencies, and reports are permitted when needed. Inspect
 runners for prohibited persistent changes before use; stop if they are required.
+Use the `test-all` skill's `assets/test-overview-template.html` for any HTML
+test-status overview, following that skill's rendering instructions; native
+detailed reports may be linked.
 
 ## Discover
 

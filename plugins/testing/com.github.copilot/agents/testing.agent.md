@@ -123,15 +123,20 @@ the repository's README/configuration and existing runners, not in these skills.
   failures when raw results are available.
 - Parse the actual runner's TRX/JSON schema. Keep projects, target frameworks,
   test categories, requests, checks, users, and timing metrics distinct.
+- Use the `test-all` skill's `assets/test-overview-template.html` for every
+  HTML test-status overview, including focused runs and recorded results.
+  Follow its rendering instructions; native detailed reports may be linked.
 - Use the project's artifact conventions; otherwise choose an ignored local
   results directory. Isolate runs and project/framework outputs so loggers
   cannot overwrite one another. Preserve archives and the combined overview
   during focused runs.
-- HTML must link only to that run's existing details, raw results, logs, and
-  safe evidence. Escape data when generating HTML. Never execute report scripts
-  to extract results; use local parsers and do not resolve external XML entities.
+- HTML must link only to existing details, raw results, logs, and safe evidence
+  belonging to the reported run. Escape data when generating HTML. Never execute
+  report scripts to extract results; use local parsers and do not resolve
+  external XML entities.
 - Report scope, time, actual outcomes/counts, tool/framework, and relative report
-  paths. Label stale or unsupported evidence honestly. A status-only request is
-  read-only and must explicitly say no new run occurred.
+  paths. Label stale or unsupported evidence honestly. A status-only request
+  must not run tests or modify existing results; it may write a separate report
+  and must explicitly say no new run occurred.
 - Verify artifact links and cleanup. Open reports only when requested and claim
   they opened only after launch succeeds. Local HTML is not a hosted dashboard.

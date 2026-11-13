@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Test overview</title>
+  <style>
+    body{font:16px system-ui,sans-serif;background:#f4f6fa;color:#17233b;max-width:1600px;margin:40px auto;padding:0 24px}
+    table{width:100%;border-collapse:collapse;background:white}
+    th,td{text-align:left;padding:16px;border-bottom:1px solid #dfe4ed;vertical-align:top}
+    thead{background:#e8edf5}
+    .pass{color:#146c36;font-weight:bold}
+    .fail,.error{color:#a32222;font-weight:bold}
+    .not-run,.not-configured,.not-selected,.skipped,.unknown,.stale{color:#667085;white-space:nowrap}
+    .banner{padding:18px;background:white;border-left:5px solid currentColor;margin:24px 0}
+    a{color:#164fa4}
+    small{color:#536079}
+    .times{white-space:pre-line}
+    .table-wrap{overflow-x:auto}
+    .details{min-width:360px;white-space:nowrap}
+    .metrics{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-variant-numeric:tabular-nums}
+  </style>
+</head>
+<body>
+  <h1>Test overview</h1>
+  <p>{{SCOPE}}</p>
+  <p class="times">{{TIMES}}</p>
+  <div class="banner {{OVERALL_CLASS}}">{{OVERALL_STATUS}}</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Test type</th><th>Technology</th><th>Status</th><th>Main results</th><th>Duration</th><th>Details</th></tr>
+      </thead>
+      <tbody>
+        {{ROWS}}
+      </tbody>
+    </table>
+  </div>
+  {{NOTES}}
+  {{SUMMARY_LINK}}
+</body>
+</html>

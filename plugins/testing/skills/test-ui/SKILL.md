@@ -12,6 +12,9 @@ Run existing tests only: never create or modify desktop UI or xUnit tests, xUnit
 project/fixture configuration, or application code, configuration, dependencies,
 or behavior. Test-only runners and reports may be created when needed. Inspect
 runners for prohibited persistent changes before use; stop if they are required.
+Use the `test-all` skill's `assets/test-overview-template.html` for any HTML
+test-status overview, following that skill's rendering instructions; native
+detailed reports may be linked.
 
 ## Discover and preflight
 

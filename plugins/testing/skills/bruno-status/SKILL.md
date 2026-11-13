@@ -1,18 +1,20 @@
 ---
 name: bruno-status
-description: Discover and show a project's latest recorded Bruno results with actual collection ordering and numbering. Read-only by default; never rerun tests to answer a status request.
+description: Show a project's latest recorded Bruno results with actual collection ordering and numbering. Never rerun tests to answer a status request.
 ---
 
 # Bruno test status
 
 Read applicable repository instructions, including `AGENTS.md` when present,
-and testing documentation. This is a read-only overview, not a new test run.
+and testing documentation. This is an overview of recorded results, not a new
+test run. Do not change test sources, existing results, or the application;
+generating a separate local status report is permitted.
 Do not require a specific collection path, report location, or CLI version.
 
 Never modify application code, configuration, dependencies, or behavior, or
-create or modify xUnit tests or their project/fixture configuration. A status
-request is read-only. For an explicit fresh run, inspect runners for prohibited
-persistent changes before use and stop if they are required.
+create or modify xUnit tests or their project/fixture configuration. For an
+explicit fresh run, inspect runners for prohibited persistent changes before use
+and stop if they are required.
 
 ## Evidence
 
@@ -61,6 +63,11 @@ persistent changes before use and stop if they are required.
   printing tokens, authorization headers, or unrelated request/response data.
 - Finish with the relative report path and explicitly state:
   **No new run was performed.**
+- For an HTML test-status overview, use the `test-all` skill's
+  `assets/test-overview-template.html` and its rendering instructions. Label it
+  as recorded, include the recorded time and freshness, and link only verified
+  artifacts from that run. Preserve existing reports; do not generate fresh
+  results by running tests. A detailed scenario table may supplement the overview.
 
 ## Explicit requests to rerun or open results
 

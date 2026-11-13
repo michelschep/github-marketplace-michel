@@ -13,6 +13,9 @@ Never create or modify xUnit tests, their project or fixture configuration, or
 application code, configuration, dependencies, or behavior. Test-only runners
 and reports may be created when needed. Inspect existing runners for prohibited
 persistent changes before use; stop and explain if those changes are necessary.
+Use the `test-all` skill's `assets/test-overview-template.html` for any HTML
+test-status overview, following that skill's rendering instructions; native
+detailed reports may be linked.
 
 ## Discover and scope
 

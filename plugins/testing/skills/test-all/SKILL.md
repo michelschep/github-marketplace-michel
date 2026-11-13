@@ -64,16 +64,20 @@ changes before use; stop if they are required.
 1. Inspect each command exit code and fresh raw results. Derive actual counts,
    skips, errors, thresholds, and timings from the producer's schema; do not
    assume a specific summary JSON layout or equate HTTP success with test PASS.
-2. Use the project's HTML overview/reporters when available. Otherwise create a
-   local start page with a row per suite, separate Test type and Technology
-   columns for category and actual tool/framework,
-   outcome/reason, meaningful metrics on separate readable lines, duration, and
-   relative links to detailed
-   HTML, raw results, logs, and safe failure evidence. Create local detail pages
-   from raw results where a native HTML reporter is unavailable; disclose limits.
-   Keep detail links together on one line in a sufficiently wide column; use
-   horizontal table scrolling on narrow screens instead of wrapping those links.
-   Escape report data and never fetch remote scripts to parse evidence.
+2. Always use `assets/test-overview-template.html` in this skill directory for
+   the HTML status overview, including focused runs. Fill every placeholder
+   using verified results; never publish the template with placeholders or
+   fabricate missing data. Escape all dynamic text and attribute values.
+   `SCOPE`, `TIMES`, and `OVERALL_STATUS` are text; `OVERALL_CLASS` is a
+   fixed status class from the template. `ROWS` contains one table row per
+   suite, with row-header test type, technology, status, a `metrics` list,
+   duration, and a `details` cell with relative links to existing artifacts.
+   `NOTES` contains short paragraphs describing scope/status limitations;
+   `SUMMARY_LINK` is an optional link to a verified machine-readable summary.
+   Use `-` for unavailable details and do not invent links. Reuse project
+   reporters for linked details, or create local detail pages from raw results
+   where needed and disclose their limits. Never fetch remote scripts to parse
+   evidence.
 3. Keep the full category inventory visible, including categories without tests
    as NOT CONFIGURED and existing suites outside the requested scope as
    NOT SELECTED. Neither counts as executed or passed. Keep FAIL,
